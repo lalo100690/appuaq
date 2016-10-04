@@ -29,7 +29,7 @@ button[disabled=true]{
 	-webkit-filter:saturate(0%);
 }
 
-.loading{
+.loading2{
 	height: 0px;
 	opacity: 0;
 	visibility: hidden;
