@@ -1,0 +1,117 @@
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="estilo.css">
+  <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+<body id="body-login" background="#000">
+
+
+
+<div class="center">
+  <div class="splash">
+    <img id="logo-login" src="img/Uaq-logo.png">
+    <h1>SEGURIUAQ<br><sub>La seguridad es de todos</sub></h1>
+  </div>
+  <img src="img/load.gif" class="loading">
+  <div class="log">
+  <input type="number" id="number" placeholder="Expediente/Clave de Empleado" class="login-input user">
+
+   <input type="password" id="password" placeholder="NIP" class="login-input pass">
+  
+
+  <button class="btn" type="submit" onclick="login()">Entrar</button>
+</div>  
+  <div id="msj">
+    <h1>Algo salió mal.</h1>
+    <p>Revisa tu conexión a Internet</p>
+  </div>
+
+   <div id="msj2">
+   <h1>Algo salió mal.</h1>
+    <p>Revisa tus datos de inicio de sesión</p>
+  </div>
+</div>
+  <script>
+    if (!navigator.onLine) {
+      noConex();
+    }
+    //EVENTLISTENERS
+    window.addEventListener('load', init, true);
+    window.addEventListener('online', conex, true);
+    window.addEventListener('offline', noConex, true);
+
+    //CHECAR CONEXION
+    function init(){
+      if (localStorage.getItem('usuario')) {
+        setTimeout(function(){window.location.assign('main.html')},1500);
+      }
+      centrado = document.querySelector('.center');
+      altura = centrado.offsetHeight;
+      centrado.style.top = "50%";
+      centrado.style.marginTop="-"+altura/2+"px"
+    }
+
+    function noConex(){
+      document.querySelector('#msj').classList.add('show');
+      document.querySelector('#btn-login').disabled=true
+      document.querySelector('#btn-login').classList.add('disabled-normal')
+    }
+
+    function conex(){
+      document.querySelector('#msj').classList.remove('show');
+      document.querySelector('#btn-login').disabled=false
+      document.querySelector('#btn-login').classList.remove('disabled-normal')
+
+    }
+
+    function login()
+    {
+      btn = document.querySelector('.btn');
+      btn.innerHTML="<img src='img/load.gif'>"
+      btn.classList.add('loading')
+      btn.disabled=true;
+
+      number = document.getElementById('number');
+      password = document.getElementById('password');
+
+      xhttp = new XMLHttpRequest();
+      xhttp.open("GET", "http://148.220.52.100/suaq/index.php?number=" + number.value + "&password=" + password.value, true)
+      
+      xhttp.onreadystatechange = function(){
+        if (xhttp.status == 404) {
+          console.log('No hay archivo')
+        }
+
+        if (xhttp.readyState == 4 && xhttp.status == 200){
+          
+          console.log(xhttp.responseText);
+
+          if (xhttp.responseText.trim()=="corsOKD"){
+            location.assign('main.html');
+            localStorage.setItem('usuario',number.value)
+            localStorage.setItem('pass',password.value)
+          }else if (xhttp.responseText.trim() == "corsOKE"){
+            location.assign('main.html');
+            localStorage.setItem('usuario',number.value)
+            localStorage.setItem('pass',password.value)
+          }else{
+            btn.innerHTML="Entrar"
+            btn.classList.remove('loading')
+            btn.disabled=false;
+            console.log("Error", xhttp.responseText);
+            number.style.borderBottom="1px solid #d5443a";
+            password.style.borderBottom="1px solid #d5443a";
+
+            document.querySelector('#msj2').classList.add('show-msj');
+            setTimeout(function(){document.querySelector('#msj2').classList.remove('show-msj');},10000)
+          }
+        }
+      }
+      xhttp.send();  
+    }
+  </script>
+</body>
+</html>

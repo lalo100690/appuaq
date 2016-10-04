@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title>Index</title>
+    
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<!-- <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300' rel='stylesheet' type='text/css'> -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <script src="js/jquery-3.1.0.js"></script>
+
+  <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="manifest" href="manifest.json">
+
+<!--   <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: https://api.tiles.mapbox.com/mapbox-gl-js/v0.22.0/mapbox-gl.js js/f.js js/mapa.js 'unsafe-inline' 'unsafe-eval';
+  object-src 'self';
+  script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
+  style-src 'unsafe-inline' https://api.tiles.mapbox.com/mapbox-gl-js/v0.22.0/mapbox-gl.css; 
+  media-src *"> -->
+
+  <!-- Enable all requests, inline styles, and eval() -->
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.22.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.22.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="js/f.js"></script>
+    <script src="js/mapa.js"></script>
+
+    <!-- <script src="https://js.pusher.com/3.2/pusher.min.js"></script> -->
+
+
+</head>
+
+<body>
+		<div class="btn-switch">
+			<img src="img/sonido.svg" id="sonido" class="white">
+      <input type="range" min="0" max="1" onchange="silenciar(this.value)">
+		</div>
+
+		<button class="btn-ajustes" onclick="showMenu()">
+      <img src="img/menu.svg" class="white">
+    </button>
+
+		<div class="abajo">
+			<button id="otro" onclick="window.location.assign('reporte.html')">
+        <img src="img/horn.svg" class="white animate bounce">
+      </button>
+
+			<div id="sos" id="sos">
+        <div class="max">
+          <div class="time" id="time"></div>
+        </div>
+        <p id="debug">SOS</p>
+        <div class="med" onclick="alertaSOS()">
+        	<img src="img/med.svg" class="white"> 
+        </div>
+      </div>
+    </div>
+
+    <div class="vigilante">
+       <h1>Alerta Roja Enviada</h1>
+       <input type="text" placeholder="Codigo de Vigilante">
+       <button class="aceptar">OK</button>
+    </div>
+
+	<div id="mapa" class="over">
+    
+  </div>
+
+	<div id="msj">
+		Revisa tu conexión a Internet
+	</div>
+
+  <div class="sonido">
+    <audio id="sound" loop>
+      <source src="alarma.mp3" type="audio/mp3">
+    </audio>
+  </div>
+
+	<div class="menu">
+		<button class="cerrar" onclick="showMenu()">
+			<img src="img/cerrar.svg" class="white">
+		</button>
+
+    <div class="usuario">
+      <img src="img/lalo.png">
+      <h1>Eduardo Aguirre Caracheo</h1>
+    </div>
+
+		<ul>
+			<li>Feedback</li>
+			<li>Ayuda</li>
+			<li onclick="logout()">Cerrar Sesión</li>
+		</ul>
+	</div>
+
+</body>
+
+
+
+</html>
+
+
+
+
+
+

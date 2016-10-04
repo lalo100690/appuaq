@@ -1,0 +1,112 @@
+<html>
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<!-- <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300' rel='stylesheet' type='text/css'> -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <script src="js/jquery-3.1.0.js"></script>
+
+  <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+
+  
+<!--   <meta http-equiv="Content-Security-Policy" content="
+default-src 'self' data: gap:
+    *;
+script-src 'self' 'unsafe-inline' 'unsafe-eval'
+    *;
+style-src 'self' 'unsafe-inline' 'unsafe-eval'
+    *;
+media-src 'self' 'unsafe-inline' 'unsafe-eval'
+    *;
+img-src 'self' 'unsafe-inline' 'unsafe-eval'
+    *;
+connect-srv 'self' 'unsafe-inline' 'unsafe-eval'
+    *"> -->
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.22.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.22.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- <script src="js/f.js"></script> -->
+    <!-- <script src="js/mapa.js"></script> -->
+
+    <!-- <script src="https://js.pusher.com/3.2/pusher.min.js"></script> -->
+
+
+</head>
+
+<body id="body-login">
+
+		<button class="btn-ajustes" onclick="back()">
+      <img src="img/cerrar.svg" class="white">
+    </button>
+    
+    <!-- <div class="mini-mapa">
+      <div id="mapa" class="over-mini"></div>
+    </div> -->
+
+    <div class="form">
+      <h1>Reporte de Incidente</h1>
+      <select>
+        <option>Tipo de incidente</option>
+        <textarea placeholder="Descripción del Incidente"></textarea>
+        <input type="file" name ="file" id="file" data-multiple-caption="{count} Archivos Ajuntados" multiple class="f">
+
+        <label class="file" for="file">CARGAR ARCHIVOS</label>
+        
+        <button class="cancelar" onclick="window.location.assign('main.html')">Cancelar</button>
+        <button class="aceptar">Enviar</button>
+      </select>
+    </div>
+    
+
+    <div id="msj">
+		  Revisa tu conexión a Internet
+    </div>
+
+	<div class="menu">
+		<button class="cerrar" onclick="showMenu()">
+			<img src="img/cerrar.svg" class="white">
+		</button>
+		<ul>
+			<li>Feedback</li>
+			<li>Ayuda</li>
+			<li>Cerrar Sesión</li>
+		</ul>
+	</div>
+
+  <script type="text/javascript">
+    function back() {
+      location.assign('main.html')
+    }
+
+    var inputs = document.querySelectorAll( '#file' );
+    Array.prototype.forEach.call( inputs, function( input )
+    {
+      var label  = input.nextElementSibling,
+        labelVal = label.innerHTML;
+
+      input.addEventListener( 'change', function( e )
+      {
+        var fileName = '';
+        if( this.files && this.files.length > 1 )
+          fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+        else
+          fileName = e.target.value.split( '\\' ).pop();
+
+        if( fileName )
+          document.querySelector( '.file' ).innerHTML = fileName;
+        else
+          label.innerHTML = labelVal;
+      });
+    });
+  </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
